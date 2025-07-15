@@ -1,5 +1,5 @@
 import express from 'express'; 
-import { login, register, getEmployee, updateEmployee, updatePassword } from "../controllers/user.controller.js";
+import { login, register, getEmployee, updateEmployee, updatePassword, getWelcome } from "../controllers/user.controller.js";
 import checkToken from '../middlewares/checkToken.js';
 
 const router = express.Router();
@@ -9,5 +9,7 @@ router.post('/login', login);
 router.get('/employee', checkToken, getEmployee);
 router.put('/employee/update', checkToken, updateEmployee)
 router.put('/employee/password', checkToken, updatePassword)
+router.get('/employee/welcome', checkToken, getWelcome)
 
-export default router ; 
+
+export default router; 
