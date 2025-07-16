@@ -40,3 +40,16 @@ export const getEmployeePassword = (idEmployee) => {
 
     return db.query(selectEmployee, [ idEmployee]);
 }
+
+export const getEmployeeWelcome = (employeeId) => {
+    const getEmployeeWelcome=
+    'SELECT idEmployee, firstName , role FROM employee where idEmployee = ?;';
+    return db.query(getEmployeeWelcome, [employeeId]);
+}
+
+export const getStocks = (nameProduct, unit, stock, priceHttc) => {
+    const addStocks = 
+    'INSER INTO product (unit, stock, priceHttc, nameProduct) VALUES (?, ?, ?, ?, ?);'
+    return db.query(addStocks, [nameProduct, unit, stock, priceHttc]);
+}
+

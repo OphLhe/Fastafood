@@ -111,3 +111,38 @@ export const updatePassword = async (req, res) => {
         console.log(error);
     }
 }
+
+
+export const getWelcome = async (req, res) => {
+
+    const employeeId = req.employee.idEmployee
+    console.log(employeeId);
+    
+    try {
+        const [result] = await userModels.getEmployeeWelcome(employeeId); 
+
+        if(result.length > 0){
+            res.status(200).json(result[0]);
+        }else{
+            res.status(400).json({message:'employé.e non trouvé.e'});
+        }
+
+    } catch (error) {
+        res.status(500).json({message: 'erreur lors de la récupération', error})
+        console.log(error);
+    }
+}
+
+export const stocks= async(req, res) => {
+
+    const{unit, stock, priceHttc, nameProduct} = req.body; 
+
+    try {
+
+        await userModels.addStocks(unit, stock, priceHttc, nameProduct)
+        res.status(201).json({message:'produit créé'});
+
+    } catch (error) {
+        res.status(500).json({message:"erreur lors de la création", error})
+    }
+};
