@@ -132,17 +132,3 @@ export const getWelcome = async (req, res) => {
         console.log(error);
     }
 }
-
-export const stocks= async(req, res) => {
-
-    const{unit, stock, priceHttc, nameProduct} = req.body; 
-
-    try {
-
-        await userModels.addStocks(unit, stock, priceHttc, nameProduct)
-        res.status(201).json({message:'produit créé'});
-
-    } catch (error) {
-        res.status(500).json({message:"erreur lors de la création", error})
-    }
-};

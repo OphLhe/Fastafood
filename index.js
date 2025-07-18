@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv'; 
 import bdd from './config/db.js';
 import userRoutes from './routes/user.routes.js'
+import stocksRoutes from './routes/stocks.routes.js'
 
 // création de l'application express 
 const app = express();
@@ -14,7 +15,7 @@ app.use(express.json());
 dotenv.config();
 
 // utilisation des routes 
-app.use('/api', userRoutes)
+app.use('/api', userRoutes, stocksRoutes)
 
 // démarrage du rserver sur le port défini dans le fichier .env 
 app.listen(process.env.PORT, () => {
