@@ -57,7 +57,7 @@ export const getEmployee = async (req, res) => {
         const [result] = await userModels.getEmployeeAccount(employeeId); 
 
         if(result.length > 0){
-            res.status(200).json(result[0]);
+            res.status(200).json(result);
         }else{
             res.status(400).json({message:'employé.e non trouvé.e'});
         }
@@ -112,6 +112,16 @@ export const updatePassword = async (req, res) => {
     }
 }
 
+export const deleteEmployee = async (req, res) => {
+    const employeeId = req.params.id;
+    try {
+        await userModels.deleteEmployee(employeeId);
+        res.status(200).json({message: 'Employé supprimé avec succès'});
+    } catch (error) {
+        res.status(500).json({message: 'Erreur lors de la suppression de l\'employé', error});
+        console.log(error);
+    }
+}
 
 export const getWelcome = async (req, res) => {
 

@@ -41,6 +41,13 @@ export const getEmployeePassword = (idEmployee) => {
     return db.query(selectEmployee, [ idEmployee]);
 }
 
+export const deleteEmployee = (idEmployee) => {
+    const deleteEmployee = 
+    'DELETE FROM employee WHERE idEmployee = ?;';
+
+    return db.query(deleteEmployee, [idEmployee]);
+}
+
 export const getEmployeeWelcome = (employeeId) => {
     const getEmployeeWelcome=
     'SELECT idEmployee, firstName , role FROM employee where idEmployee = ?;';

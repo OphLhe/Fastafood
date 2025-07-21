@@ -4,7 +4,6 @@ import dotenv from 'dotenv';
 const checkToken = (req, res, next) => {
     //  utilisation de dotenv pour charger les variables d'environnement 
     dotenv.config(); 
-    console.log(req.headers['authorization']);
 
     // récupération du token dans les headers 
     const token = req.headers['authorization'];
