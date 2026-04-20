@@ -11,7 +11,7 @@ export const register = async (req, res) => {
     const{firstName, lastName, mail, password, role} = req.body; 
 
     try {
-        const cryptedPassword = await bcrypt.hashSync(password, 10);
+        const cryptedPassword = bcrypt.hashSync(password, 10);
         
         await userModels.addEmployee(firstName, lastName, mail, cryptedPassword, role )
         res.status(201).json({message:'utilisateur créé'});
@@ -24,14 +24,13 @@ export const register = async (req, res) => {
 // connexion employé.es
 export const login = async (req, res) => {
     const {firstName, lastName, password} = req.body
-    console.log(process.env.JWT_SECRET);
     
     try {
         const [result] = await userModels.loginEmployee(firstName, lastName); 
         const employeeData = result[0];
         if(result){
             const checkPassword = await bcrypt.compare(password, employeeData.password);
-            if(checkPassword == true){
+            if(checkPassword){
                 const token = jwt.sign({ idEmployee: employeeData.idEmployee, firstName: employeeData.firstName, lastName: employeeData.lastName}, process.env.JWT_SECRET, {expiresIn:'7h'})
                 res.status(201).json({
                     message: 'connexion autorisée',
@@ -126,7 +125,6 @@ export const deleteEmployee = async (req, res) => {
 export const getWelcome = async (req, res) => {
 
     const employeeId = req.employee.idEmployee
-    console.log(employeeId);
     
     try {
         const [result] = await userModels.getEmployeeWelcome(employeeId); 

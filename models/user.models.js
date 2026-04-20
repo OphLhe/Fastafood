@@ -16,7 +16,7 @@ export const loginEmployee = (firstName, lastName) => {
 
 export const getEmployeeAccount = (employeeId) => {
     const getEmployee=
-    'SELECT idEmployee, firstName, lastName, mail FROM employee where idEmployee = ?;';
+    'SELECT idEmployee, firstName, lastName, mail, role FROM employee where idEmployee = ?;';
     return db.query(getEmployee, [employeeId]);
 } 
 

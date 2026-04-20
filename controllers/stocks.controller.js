@@ -6,7 +6,6 @@ import * as stockModels from '../models/stocks.models.js';
 dotenv.config(); 
 
 export const addStocks= async(req, res) => {
-console.log(req.body);
 
     const{unit, stock, criticalStock, priceHttc, nameProduct, categoryId} = req.body; 
 
