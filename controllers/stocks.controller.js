@@ -40,7 +40,7 @@ export const getStocks= async (req,res) => {
         if(result.length > 0){
             res.status(200).json(result);
         }else{
-            res.status(400).json({message:'produit non trouvé'});
+            res.status(404).json({message:'produit non trouvé'});
         }
     } catch (error) {
         res.status(500).json({message: "erreur lors de la récupération du produit", error})
@@ -54,9 +54,23 @@ export const getCategoryName = async (req, res) => {
          if(result.length > 0){
             res.status(200).json(result);
         }else{
-            res.status(400).json({message:'produit non trouvé'});
+            res.status(404).json({message:'produit non trouvé'});
         }
     } catch (error) {
        res.status(500).json({message: "erreur lors de la récupération de la categorie", error})
+    }
+}
+
+export const getProductByName = async (req,res) => {
+    const {categoryName} = req.params
+    try {
+        const [result] = await stockModels.productByName(categoryName)
+        if(result.length > 0){
+            res.status(200).json(result)
+        }else{
+            res.status(404).json({message:'nom du produit non trouvé', error})
+        }
+    } catch (error) {
+        res.status(500).json({message: 'erreur lors de la récupération des produits par nom', error})
     }
 }

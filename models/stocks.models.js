@@ -20,6 +20,12 @@ export const stocks = () => {
 
 export const categoryName = () => {
     const getCategoryName = 
-    'Select idCategory, categoryName from category;'
+    'SELECT idCategory, categoryName FROM category;'
     return db.query(getCategoryName)
+}
+
+export const productByName = (categoryName) => {
+    const getProductByName = 
+    `SELECT idProduct, nameProduct, priceHttc, stock FROM product INNER JOIN category ON product.categoryId = category.idCategory WHERE category.categoryName = ?;`
+    return db.query(getProductByName,[categoryName])
 }

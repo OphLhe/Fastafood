@@ -12,7 +12,7 @@ export const getProducts= async (req,res) => {
         if(result.length > 0){
             res.status(200).json(result);
         }else{
-            res.status(400).json({message:'produit non trouvé'});
+            res.status(404).json({message:'produit non trouvé'});
         }
     } catch (error) {
         res.status(500).json({message: "erreur lors de la récupération du produit", error})
